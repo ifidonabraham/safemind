@@ -2,7 +2,9 @@
 
 Privacy-first mental wellness prototype for University of Lagos students. The spec pack is in `docs/`. Coding rules are in `AGENTS.md`.
 
-This repository is at Phase 0: the app scaffold. Product screens are not built yet.
+This repository is at Phase 1: design system and public pages. Sign-up, data, and product tools are not built yet.
+
+Open `/` for the landing page and `/how-it-works` for the safety explainer. `/dev/ui` previews components in development only.
 
 ## Scripts
 

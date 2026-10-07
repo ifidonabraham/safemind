@@ -1,26 +1,220 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+  Token source: docs/DESIGN_SYSTEM.md.
+  care (#C8643F) is for fills and borders. Small text uses care-ink so the
+  pair stays WCAG AA (care on paper is about 3.7:1).
+  Keep the two dark blocks identical. tests/design/tokens.test.ts checks them.
+*/
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+:root {
+  /* light-tokens */
+  color-scheme: light;
+  --bg: #faf7f2;
+  --surface: #ffffff;
+  --surface-alt: #f1ece3;
+  --ink: #1f2a2e;
+  --ink-soft: #5b6a6e;
+  --primary: #2f6f6a;
+  --primary-soft: #dcebe8;
+  --accent: #e59a6b;
+  --calm: #8fb8a8;
+  --care: #c8643f;
+  --care-ink: #9a4a2e;
+  --care-soft: #f8e7e0;
+  --line: #e2dcd0;
+  --on-primary: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root:not(.light) {
+    /* dark-tokens */
+    color-scheme: dark;
+    --bg: #121a1c;
+    --surface: #1b2528;
+    --surface-alt: #243033;
+    --ink: #eaf0ee;
+    --ink-soft: #9fb0b0;
+    --primary: #6fb8af;
+    --primary-soft: #1a3330;
+    --accent: #e59a6b;
+    --calm: #8fb8a8;
+    --care: #c8643f;
+    --care-ink: #f0c2b0;
+    --care-soft: #3a2a26;
+    --line: #2c3a3d;
+    --on-primary: #121a1c;
   }
 }
 
+:root.dark {
+  /* dark-tokens */
+  color-scheme: dark;
+  --bg: #121a1c;
+  --surface: #1b2528;
+  --surface-alt: #243033;
+  --ink: #eaf0ee;
+  --ink-soft: #9fb0b0;
+  --primary: #6fb8af;
+  --primary-soft: #1a3330;
+  --accent: #e59a6b;
+  --calm: #8fb8a8;
+  --care: #c8643f;
+  --care-ink: #f0c2b0;
+  --care-soft: #3a2a26;
+  --line: #2c3a3d;
+  --on-primary: #121a1c;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-alt: var(--surface-alt);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-primary: var(--primary);
+  --color-primary-soft: var(--primary-soft);
+  --color-accent: var(--accent);
+  --color-calm: var(--calm);
+  --color-care: var(--care);
+  --color-care-ink: var(--care-ink);
+  --color-care-soft: var(--care-soft);
+  --color-line: var(--line);
+  --color-on-primary: var(--on-primary);
+  --font-sans: var(--font-dm-sans), system-ui, sans-serif;
+  --font-serif: var(--font-fraunces), Georgia, serif;
+  --shadow-soft: 0 4px 24px rgb(31 42 46 / 0.06);
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  overflow-x: clip;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.breathing-mask {
+  mask-image: linear-gradient(to right, transparent 0%, #000 68%);
+}
+
+.orb {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: breathe 6s ease-in-out infinite;
+}
+
+.orb-b {
+  animation-duration: 7.5s;
+  animation-delay: -2s;
+}
+
+.orb-c {
+  animation-duration: 8s;
+  animation-delay: -4s;
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(0.94);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+.rise {
+  animation: rise 250ms ease-out;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.typing-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: var(--ink-soft);
+  animation: typing 1.2s ease-in-out infinite;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes typing {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.mood-orb[data-selected="true"] {
+  transform: scale(1.06);
+}
+
+.sheet-panel {
+  animation: sheet-in 250ms ease-out;
+}
+
+@keyframes sheet-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orb,
+  .rise,
+  .typing-dot,
+  .sheet-panel {
+    animation: none;
+    transform: none;
+  }
+
+  .mood-orb[data-selected="true"] {
+    transform: none;
+  }
+
+  .rise,
+  .sheet-panel {
+    opacity: 1;
+  }
 }
