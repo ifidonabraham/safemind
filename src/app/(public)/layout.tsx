@@ -13,7 +13,7 @@ export default function PublicLayout({ children }: { children: ReactNode }) {
         Skip to content
       </a>
       <PublicHeader />
-      <div id="content" className="flex w-full min-w-0 flex-1 flex-col">
+      <div id="content" className="page-enter flex w-full min-w-0 flex-1 flex-col">
         {children}
       </div>
       <PublicFooter />

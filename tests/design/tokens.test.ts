@@ -121,20 +121,32 @@ test("hero animation is CSS and stays under 30KB", () => {
   expect(files.some((file) => /\.(mp4|webm|gif)$/i.test(file))).toBe(false);
 });
 
+function collectSources(directory: string, into: string[]) {
+  for (const entry of readdirSync(directory, { withFileTypes: true })) {
+    const full = path.join(directory, entry.name);
+    if (entry.isDirectory()) collectSources(full, into);
+    else if (/\.(tsx|ts)$/.test(entry.name)) into.push(full);
+  }
+}
+
 test("public copy avoids clinical labels and invented phone numbers", () => {
-  const files = [
-    "src/app/(public)/page.tsx",
-    "src/app/(public)/how-it-works/page.tsx",
-    "src/app/not-found.tsx",
-    "src/components/layout/public-footer.tsx",
-    "src/components/layout/public-header.tsx",
-  ];
+  const files: string[] = [path.join(root, "src/app/not-found.tsx")];
+  for (const directory of [
+    "src/app/(public)",
+    "src/app/(student)",
+    "src/components/layout",
+    "src/components/landing",
+    "src/components/app",
+    "src/components/auth",
+  ]) {
+    collectSources(path.join(root, directory), files);
+  }
   const banned =
-    /\b(patient|disorder|diagnosis|treatment|depressed|anxious|mentally ill|suffering from)\b/i;
+    /\b(patient|disorder|diagnosis|treatment|depressed|anxious|mentally ill|suffering from|prototype|stakeholder)\b/i;
   const phone = /(?:\+\d{8,}|\b\d{3}[-. )\u2013]\d{3}[-. ]\d{4}\b)/;
 
   for (const file of files) {
-    const source = readFileSync(path.join(root, file), "utf8");
+    const source = readFileSync(file, "utf8");
     expect(source, file).not.toMatch(banned);
     expect(source, file).not.toMatch(phone);
   }

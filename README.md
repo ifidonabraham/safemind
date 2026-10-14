@@ -1,10 +1,10 @@
 # SafeMind
 
-Privacy-first mental wellness prototype for University of Lagos students. The spec pack is in `docs/`. Coding rules are in `AGENTS.md`.
+Privacy-first mental wellness platform for University of Lagos students. The spec pack is in `docs/`. Coding rules are in `AGENTS.md`.
 
-This repository is at Phase 1: design system and public pages. Sign-up, data, and product tools are not built yet.
+The site is the product look: landing, sign-up, and the student screens for check-in, journal, chat, and human support. Screen data stays in the browser until the database phase.
 
-Open `/` for the landing page and `/how-it-works` for the safety explainer. `/dev/ui` previews components in development only.
+Open `/` for the landing page, `/register` to enter, and `/student` for home. `/dev/ui` previews components in development only.
 
 ## Scripts
 

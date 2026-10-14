@@ -112,6 +112,35 @@ h3 {
   mask-image: linear-gradient(to right, transparent 0%, #000 68%);
 }
 
+.hero-scrim {
+  background:
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      color-mix(in srgb, var(--bg) 72%, transparent) 78%,
+      var(--bg) 100%
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--bg) 94%, transparent) 0%,
+      color-mix(in srgb, var(--bg) 40%, transparent) 48%,
+      transparent 100%
+    );
+}
+
+.page-enter {
+  animation: page-fade 280ms ease-out;
+}
+
+@keyframes page-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .orb {
   transform-box: fill-box;
   transform-origin: center;
@@ -119,11 +148,13 @@ h3 {
 }
 
 .orb-b {
+  animation-name: breathe-b;
   animation-duration: 7.5s;
   animation-delay: -2s;
 }
 
 .orb-c {
+  animation-name: breathe-c;
   animation-duration: 8s;
   animation-delay: -4s;
 }
@@ -131,17 +162,41 @@ h3 {
 @keyframes breathe {
   0%,
   100% {
-    transform: scale(0.94);
+    transform: translate(0, 0) scale(0.88);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate(10px, -16px) scale(1.1);
+    opacity: 1;
+  }
+}
+
+@keyframes breathe-b {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(0.9);
     opacity: 0.45;
   }
   50% {
-    transform: scale(1.05);
-    opacity: 0.8;
+    transform: translate(-18px, 12px) scale(1.14);
+    opacity: 0.95;
+  }
+}
+
+@keyframes breathe-c {
+  0%,
+  100% {
+    transform: translate(0, 8px) scale(0.86);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translate(14px, -8px) scale(1.12);
+    opacity: 0.9;
   }
 }
 
 .rise {
-  animation: rise 250ms ease-out;
+  animation: rise 280ms ease-out both;
 }
 
 @keyframes rise {
@@ -182,7 +237,8 @@ h3 {
 }
 
 .mood-orb[data-selected="true"] {
-  transform: scale(1.06);
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 12px rgb(47 111 106 / 0.55));
 }
 
 .sheet-panel {
@@ -202,6 +258,8 @@ h3 {
 
 @media (prefers-reduced-motion: reduce) {
   .orb,
+  .orb-b,
+  .orb-c,
   .rise,
   .typing-dot,
   .sheet-panel {
@@ -211,6 +269,7 @@ h3 {
 
   .mood-orb[data-selected="true"] {
     transform: none;
+    filter: none;
   }
 
   .rise,

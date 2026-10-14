@@ -7,8 +7,8 @@ export default function NotFound() {
   return (
     <main className="mx-auto flex w-full max-w-xl flex-1 flex-col justify-center px-4 py-16">
       <EmptyState
-        title="This page is not in the prototype yet"
-        description="The public pages are ready. Sign-up comes in the next build step."
+        title="That page is not here"
+        description="The link may be old. You can go back to SafeMind."
         action={
           <Link href="/" className={buttonClassName("primary")}>
             Back to SafeMind

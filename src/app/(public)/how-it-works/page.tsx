@@ -39,8 +39,7 @@ export default function HowItWorksPage() {
         How SafeMind keeps you safe
       </h1>
       <p className="mt-4 max-w-[65ch] text-lg text-ink">
-        Before the features, here is who can see what. Plain language, no small
-        print.
+        Here is who can see what, in plain language.
       </p>
 
       <section className="mt-12 max-w-[65ch]">
@@ -140,15 +139,6 @@ export default function HowItWorksPage() {
         </p>
       </section>
 
-      <section className="mt-12 max-w-[65ch]">
-        <h2 className="text-[28px] text-ink">About this prototype</h2>
-        <p className="mt-3 text-base text-ink">
-          This is a stakeholder demo, not a service for real students yet. The
-          privacy notice is pending legal and clinical review. Crisis contacts
-          are not shown. They will be added only after the UNILAG counselling
-          unit verifies them.
-        </p>
-      </section>
     </article>
   );
 }
