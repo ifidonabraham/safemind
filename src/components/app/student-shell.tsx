@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, type ReactNode } from "react";
+import { Suspense, useState, type ReactNode } from "react";
 
 import { CrisisActions, CrisisCopy } from "@/components/app/crisis-card";
 import { LookProvider, useLook } from "@/components/app/look-store";
@@ -148,8 +148,17 @@ function ShellFrame({ children }: { children: ReactNode }) {
 
 export function StudentShell({ children }: { children: ReactNode }) {
   return (
-    <LookProvider>
-      <ShellFrame>{children}</ShellFrame>
-    </LookProvider>
+    <Suspense
+      fallback={
+        <div className="min-h-dvh bg-bg p-8" aria-busy="true">
+          <Skeleton className="h-8 w-40" />
+          <Skeleton className="mt-6 h-36" />
+        </div>
+      }
+    >
+      <LookProvider>
+        <ShellFrame>{children}</ShellFrame>
+      </LookProvider>
+    </Suspense>
   );
 }
